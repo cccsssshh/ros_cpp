@@ -3,11 +3,12 @@
 ImageSubscriberNode::ImageSubscriberNode()
 : Node("image_subscriber_node")
 {
-    subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
-        "/webcam_image", 10, std::bind(&ImageSubscriberNode::imageCallback, this, std::placeholders::_1));
-    
+    image_subscription_ = this->create_subscription<sensor_msgs::msg::Image>(
+        "/camera/color/image_raw", 10, std::bind(&ImageSubscriberNode::imageCallback, this, std::placeholders::_1));
+
     RCLCPP_INFO(this->get_logger(), "Image subscriber node has been initialized.");
 }
+
 
 void ImageSubscriberNode::imageCallback(const sensor_msgs::msg::Image::SharedPtr msg)
 {

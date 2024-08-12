@@ -15,6 +15,10 @@ find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(nav2_msgs REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
@@ -37,8 +41,10 @@ qt5_wrap_cpp(MOC_FILES include/storagy/main_window.hpp)
 
 add_executable(main_window
   src/main.cpp
-  src/main_window.cpp
   src/image_sub_node.cpp
+  src/battery_sub_node.cpp
+  src/robot_control_node.cpp
+  src/main_window.cpp
   ${UIC_FILES}
   ${MOC_FILES}
 )
@@ -58,6 +64,10 @@ ament_target_dependencies(main_window
   sensor_msgs
   cv_bridge
   OpenCV
+  geometry_msgs
+  tf2
+  tf2_ros
+  nav2_msgs
 )
 
 # Change this to use the "plain" signature
